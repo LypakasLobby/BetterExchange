@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Specification-Title: betterexchange
+Specification-Version: 1
+Implementation-Title: betterexchange
+Implementation-Version: 1.16.5-1.2.6
+Implementation-Timestamp: 2024-02-15T09:30:16-0600
+

@@ -5,6 +5,7 @@ import ca.landonjw.gooeylibs2.api.button.Button;
 import ca.landonjw.gooeylibs2.api.button.GooeyButton;
 import ca.landonjw.gooeylibs2.api.page.GooeyPage;
 import ca.landonjw.gooeylibs2.api.template.types.ChestTemplate;
+import com.lypaka.betterexchange.BetterExchange;
 import com.lypaka.betterexchange.ConfigGetters;
 import com.lypaka.betterexchange.ExchangeHandlers.SellPokemonForPoints;
 import com.lypaka.betterexchange.PointHandlers.PointValidation;
@@ -115,7 +116,7 @@ public class PartyGUI {
 
         } else {
 
-            boolean passes = false;
+            boolean passes = ConfigGetters.blacklist.isEmpty();
             for (String s : ConfigGetters.blacklist) {
 
                 if (s.equalsIgnoreCase("!legendary")) {
