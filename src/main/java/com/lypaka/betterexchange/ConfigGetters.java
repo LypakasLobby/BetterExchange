@@ -44,7 +44,7 @@ public class ConfigGetters {
     public static String partyGUINoPokemonButtonName;
     public static Map<String, Map<String, String>> partyGUIPartySlotsMap;
 
-    public static void load() throws ObjectMappingException {
+    public static void load (boolean reload) throws ObjectMappingException {
 
         commandPermission = BetterExchange.configManager.getConfigNode(0, "Command-Permission").getString();
         exchangeSystemEnabled = BetterExchange.configManager.getConfigNode(0, "Enabled").getBoolean();
@@ -54,7 +54,11 @@ public class ConfigGetters {
         exchangeSellMap = BetterExchange.configManager.getConfigNode(0, "Exchange", "Sell").getValue(new TypeToken<Map<String, Map<String, String>>>() {});
         customListingsMap = new HashMap<>();
         customListingsMap = BetterExchange.configManager.getConfigNode(0, "Special-Listings").getValue(new TypeToken<Map<String, Map<String, String>>>() {});
-        pointMap = BetterExchange.configManager.getConfigNode(1, "Points").getValue(new TypeToken<Map<String, Integer>>() {});
+        if (!reload) {
+
+            pointMap = BetterExchange.configManager.getConfigNode(1, "Points").getValue(new TypeToken<Map<String, Integer>>() {});
+
+        }
 
         blacklist = BetterExchange.configManager.getConfigNode(2, "Blacklist").getList(TypeToken.of(String.class));
 

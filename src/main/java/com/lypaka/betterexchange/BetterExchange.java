@@ -26,7 +26,7 @@ public class BetterExchange {
         String[] files = new String[]{"betterexchange.conf", "points.conf", "blacklist.conf", "mainGUI.conf", "partyGUI.conf"};
         configManager = new BasicConfigManager(files, dir, BetterExchange.class, MOD_NAME, MOD_ID, logger);
         configManager.init();
-        ConfigGetters.load();
+        ConfigGetters.load(false);
 
     }
 

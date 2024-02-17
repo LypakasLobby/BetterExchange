@@ -36,10 +36,8 @@ public class ReloadCommand {
 
                                                 try {
 
-                                                    BetterExchange.configManager.getConfigNode(1, "Points").setValue(ConfigGetters.pointMap);
-                                                    BetterExchange.configManager.save();
                                                     BetterExchange.configManager.load();
-                                                    ConfigGetters.load();
+                                                    ConfigGetters.load(true);
                                                     c.getSource().sendFeedback(FancyText.getFormattedText("&aSuccessfully reloaded BetterExchange!"), true);
 
                                                 } catch (ObjectMappingException e) {
