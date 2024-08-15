@@ -2,6 +2,7 @@ package com.lypaka.betterexchange.Listeners;
 
 import com.lypaka.betterexchange.BetterExchange;
 import com.lypaka.betterexchange.GUIs.ExchangeGUI;
+import com.lypaka.betterexchange.PointHandlers.PointSaveTask;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -36,6 +37,8 @@ public class ServerStartedListener {
         miniMap = new HashMap<>();
         miniMap.put(230, 243);
         ExchangeGUI.slotMap.put(6, miniMap);
+
+        PointSaveTask.startTimer();
 
     }
 

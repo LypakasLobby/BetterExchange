@@ -13,6 +13,7 @@ public class ConfigGetters {
     public static boolean exchangeSystemEnabled;
     public static Map<String, Map<String, String>> exchangeBuyMap;
     public static Map<String, Map<String, String>> exchangeSellMap;
+    public static int saveInterval;
     public static Map<String, Map<String, String>> customListingsMap;
     public static Map<String, Integer> pointMap;
 
@@ -52,6 +53,18 @@ public class ConfigGetters {
         exchangeBuyMap = BetterExchange.configManager.getConfigNode(0, "Exchange", "Buy").getValue(new TypeToken<Map<String, Map<String, String>>>() {});
         exchangeSellMap = new HashMap<>();
         exchangeSellMap = BetterExchange.configManager.getConfigNode(0, "Exchange", "Sell").getValue(new TypeToken<Map<String, Map<String, String>>>() {});
+        saveInterval = 600;
+        if (BetterExchange.configManager.getConfigNode(0, "Save-Interval").isVirtual()) {
+
+            BetterExchange.configManager.getConfigNode(0, "Save-Interval").setValue(saveInterval);
+            BetterExchange.configManager.getConfigNode(0, "Save-Interval").setComment("Sets how often, in seconds, BetterExchange saves player point values to the config. 0 to disable");
+            BetterExchange.configManager.save();
+
+        } else {
+
+            saveInterval = BetterExchange.configManager.getConfigNode(0, "Save-Interval").getInt();
+
+        }
         customListingsMap = new HashMap<>();
         customListingsMap = BetterExchange.configManager.getConfigNode(0, "Special-Listings").getValue(new TypeToken<Map<String, Map<String, String>>>() {});
         if (!reload) {

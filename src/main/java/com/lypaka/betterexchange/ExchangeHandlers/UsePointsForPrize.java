@@ -6,6 +6,7 @@ import com.lypaka.betterexchange.BetterExchange;
 import com.lypaka.betterexchange.GUIs.MainGUI;
 import com.lypaka.betterexchange.PointHandlers.Points;
 import com.lypaka.lypakautils.FancyText;
+import com.lypaka.lypakautils.MiscHandlers.PixelmonHelpers;
 import com.pixelmonmod.pixelmon.api.pokemon.Pokemon;
 import com.pixelmonmod.pixelmon.api.storage.PlayerPartyStorage;
 import com.pixelmonmod.pixelmon.api.storage.StorageProxy;
@@ -35,6 +36,7 @@ public class UsePointsForPrize {
             }
             String msg = BetterExchange.configManager.getConfigNode(0, "Special-Listings", listingName, "Message").getString();
             player.sendMessage(FancyText.getFormattedText(msg), player.getUniqueID());
+            BetterExchange.logger.info("Player " + player.getName().getString() + " used " + points + " points to redeem listing " + listingName);
             MainGUI.openMainGui(player);
 
         }
@@ -49,8 +51,10 @@ public class UsePointsForPrize {
 
             Points.setPoints(player.getUniqueID(), Points.getPoints(player.getUniqueID()) - event.getPointsSpent());
             PlayerPartyStorage party = StorageProxy.getParty(player);
-            party.add(event.getPokemon());
+            Pokemon p = PixelmonHelpers.fixPokemonIVsAndGender(event.getPokemon());
+            party.add(p);
             player.sendMessage(FancyText.getFormattedText("&eYou used " + points + " points to redeem a " + event.getPokemon().getLocalizedName() + "!"), player.getUniqueID());
+            BetterExchange.logger.info("Player " + player.getName().getString() + " used " + points + " points to redeem a " + event.getPokemon().getLocalizedName());
             MainGUI.openMainGui(player);
 
         }
