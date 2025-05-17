@@ -3,6 +3,7 @@ package com.lypaka.betterexchange.PointHandlers;
 import com.lypaka.betterexchange.ConfigGetters;
 import com.pixelmonmod.pixelmon.api.pokemon.Pokemon;
 import com.pixelmonmod.pixelmon.api.pokemon.stats.BattleStatsType;
+import com.pixelmonmod.pixelmon.api.registries.PixelmonSpecies;
 
 import java.util.Map;
 
@@ -91,7 +92,46 @@ public class PointValidation {
 
             }
 
-        } else {
+        } else if (ConfigGetters.exchangeSellMap.containsKey("Legendary") && PixelmonSpecies.isLegendary(pokemon.getSpecies())) {
+
+            points = Integer.parseInt(ConfigGetters.exchangeSellMap.get("Legendary").get("default"));
+            if (pokemon.isShiny()) {
+
+                if (ConfigGetters.exchangeSellMap.containsKey("ShinyLegendary")) {
+
+                    points = Integer.parseInt(ConfigGetters.exchangeSellMap.get("ShinyLegendary").get("default"));
+
+                }
+
+            }
+
+        } else if (ConfigGetters.exchangeSellMap.containsKey("Mythical") && PixelmonSpecies.isMythical(pokemon.getSpecies())) {
+
+            points = Integer.parseInt(ConfigGetters.exchangeSellMap.get("Mythical").get("default"));
+            if (pokemon.isShiny()) {
+
+                if (ConfigGetters.exchangeSellMap.containsKey("ShinyMythical")) {
+
+                    points = Integer.parseInt(ConfigGetters.exchangeSellMap.get("ShinyMythical").get("default"));
+
+                }
+
+            }
+
+        } else if (ConfigGetters.exchangeSellMap.containsKey("UltraBeast") && PixelmonSpecies.isUltraBeast(pokemon.getSpecies())) {
+
+            points = Integer.parseInt(ConfigGetters.exchangeSellMap.get("UltraBeast").get("default"));
+            if (pokemon.isShiny()) {
+
+                if (ConfigGetters.exchangeSellMap.containsKey("ShinyUltraBeast")) {
+
+                    points = Integer.parseInt(ConfigGetters.exchangeSellMap.get("ShinyUltraBeast").get("default"));
+
+                }
+
+            }
+
+        }  else {
 
             points = getPointsByIVs(pokemon);
 
